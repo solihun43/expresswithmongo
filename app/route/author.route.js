@@ -5,4 +5,5 @@ module.exports = (app) => {
 	app.get('/api/v1/authors/init', authors.init);
 	app.get('/api/v1/authors', authors.findAll);
 	app.post('/api/v1/authors', authors.create);
+	app.get('/api/v1/authors/:authorId', authors.findById);
 }

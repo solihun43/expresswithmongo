@@ -81,3 +81,14 @@ exports.findAll = (req, res) => {
 		});
 	});
 };
+
+exports.findById = (req, res) => {
+
+	Author.findById(req.params.authorId)
+	.exec((err, author) => {
+		console.log(author+"\n =======");
+		if(err) return res.status(400).json({ mesaage: 'id not found'});
+
+		res.status(200).json(author);
+	});
+};
