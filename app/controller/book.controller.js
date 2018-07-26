@@ -13,6 +13,11 @@ exports.findAll = (req, res) => {
 };
 
 exports.findByName = (req, res) => {
+	if(typeof req.params.bookname !== 'string')
+		return res.status(422).json({
+			message: 'invalid parameter'
+		});
+
 	Book.findOne({ title: req.params.bookname })
 	.populate('author')
 	.exec(function(err, book){
