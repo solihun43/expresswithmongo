@@ -74,6 +74,9 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 	Author.find()
 	.then(authors => {
+		if(!authors) return res.status(404).json({
+			message : 'Author is empty'
+		});			
 		res.status(200).json(authors);
 	}).catch(err => {
 		res.status(500).json({
@@ -87,7 +90,11 @@ exports.findById = (req, res) => {
 	Author.findById(req.params.authorId)
 	.exec((err, author) => {
 		console.log(author+"\n =======");
-		if(err) return res.status(400).json({ mesaage: 'id not found'});
+		if(err) return res.status(500).json({ mesaage: 'id not found'});
+		if(!author) return res.status(404).json({
+			message : 'Author not found',
+			id : req.params.authorId
+		});
 
 		res.status(200).json(author);
 	});
