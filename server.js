@@ -6,7 +6,6 @@ app.use(bodyParser.json())
 // Configuring the database
 const dbConfig = require('./app/config/mongodb.config.js');
 const mongoose = require('mongoose');
-
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
@@ -23,7 +22,8 @@ require('./app/route/book.route.js')(app);
 require('./app/route/author.route.js')(app);
 
 // Create a Server
-var server = app.listen(8081, function () {
+const port = process.env.PORT || 8081;
+var server = app.listen(port, function () {
 
   var host = server.address().address
   var port = server.address().port
