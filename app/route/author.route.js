@@ -6,4 +6,5 @@ module.exports = (app) => {
 	app.get('/api/v1/authors', authors.findAll);
 	app.post('/api/v1/authors', authors.create);
 	app.get('/api/v1/authors/:authorId', authors.findById);
+	app.put('/api/v1/authors/:authorId', authors.update);
 }

@@ -92,3 +92,19 @@ exports.findById = (req, res) => {
 		res.status(200).json(author);
 	});
 };
+
+exports.update = (req, res) => {
+	if(req.params.authorId == null) return res.status(500).json({ message: 'null entity'});
+
+	Author.findByIdAndUpdate(
+		req.params.authorId,
+		req.body,
+		{new : true},
+		(err, author) =>{
+			if(err) return res.status(500).json({
+				message: 'error when updating'
+			});
+
+			res.status(200).json(author);
+	});
+};
