@@ -108,3 +108,20 @@ exports.update = (req, res) => {
 			res.status(200).json(author);
 	});
 };
+
+exports.delete = (req, res) => {
+	if(req.params.authorId == null) return res.status(500).json({ message: 'null entity'});
+
+	Author.findByIdAndRemove(
+		req.params.authorId,
+		(err, author) =>{
+		if(err) return res.status(500).json({
+				message: 'error when updating'
+			});
+
+		res.status(200).json({
+			message : 'Author succesfully deleted',
+			id: author._id
+		});
+	});
+};
